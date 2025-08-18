@@ -5,7 +5,6 @@ import argparse
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import List
 
 from ingestion.pdf_to_md import pdf_to_md
 from ingestion.rules_loader import RuleLoader
@@ -25,7 +24,7 @@ def main() -> None:
     except ConfigError as e:
         raise SystemExit(str(e)) from e
 
-    pdfs: List[str] = cfg.get("inputs", {}).get("rules_pdfs", [])
+    pdfs: list[str] = cfg.get("inputs", {}).get("rules_pdfs", [])
     if not pdfs:
         print("No PDFs configured under inputs.rules_pdfs. Add file paths in your YAML.")
         return
