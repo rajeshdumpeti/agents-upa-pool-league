@@ -1,15 +1,15 @@
 from pathlib import Path
-from typing import Iterable, List
+from typing import Iterable
 
 from pypdf import PdfReader
 
 
-def pdf_to_md(pdf_paths: Iterable[str], out_dir: str) -> List[str]:
+def pdf_to_md(pdf_paths: Iterable[str], out_dir: str) -> list[str]:
     """
     Convert one or more PDF files to simple markdown-like .md files.
     Returns a list of output paths.
     """
-    out_paths: List[str] = []
+    out_paths: list[str] = []
     out_dir_path = Path(out_dir)
     out_dir_path.mkdir(parents=True, exist_ok=True)
 

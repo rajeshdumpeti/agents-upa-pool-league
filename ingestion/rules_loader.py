@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, asdict
 from pathlib import Path
-from typing import Iterable, List, Dict, Any
+from typing import Iterable, Any
 import re
 
 
@@ -18,7 +18,7 @@ class Section:
     source_file: str
     page: int
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
 
@@ -31,8 +31,8 @@ class RuleLoader:
     def __init__(self, min_chars: int = 40) -> None:
         self.min_chars = min_chars
 
-    def load_markdown_files(self, md_paths: Iterable[str]) -> List[Section]:
-        sections: List[Section] = []
+    def load_markdown_files(self, md_paths: Iterable[str]) -> list[Section]:
+        sections: list[Section] = []
         for path_str in md_paths:
             path = Path(path_str)
             if not path.exists():
@@ -42,13 +42,13 @@ class RuleLoader:
 
     # ---- internals -----------------------------------------------------
 
-    def _parse_file(self, path: Path) -> List[Section]:
+    def _parse_file(self, path: Path) -> list[Section]:
         text = path.read_text(encoding="utf-8")
         lines = [ln.rstrip() for ln in text.splitlines()]
 
-        sections: List[Section] = []
+        sections: list[Section] = []
         page = 1
-        para_acc: List[str] = []
+        para_acc: list[str] = []
         para_index = 0
 
         def flush_paragraph() -> None:
