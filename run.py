@@ -6,6 +6,7 @@ from agents.usg import usg_stories
 from agents.qat import qat_tests
 from utils.config import load_config, ConfigError
 
+
 def main():
     parser = argparse.ArgumentParser(description="Run the agents pipeline")
     parser.add_argument("--config", default="configs/upa.yaml", help="Path to project config YAML")
@@ -14,7 +15,7 @@ def main():
     try:
         cfg = load_config(args.config)
     except ConfigError as e:
-        raise SystemExit(str(e))
+        raise SystemExit(str(e)) from e
 
     pipeline = Pipeline([prl_clarify, sra_rules, usg_stories, qat_tests])
     initial = {"inputs": {"project_plan": cfg.get("project_name", "UPA MVP")}, "config": cfg}
@@ -29,6 +30,7 @@ def main():
     print("\n=== Test Plan ===")
     for t in result["test_plan"]:
         print("-", t)
+
 
 if __name__ == "__main__":
     main()

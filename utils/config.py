@@ -1,8 +1,10 @@
 from pathlib import Path
 import yaml
 
+
 class ConfigError(Exception):
     pass
+
 
 def load_config(path_str: str) -> dict:
     path = Path(path_str)
