@@ -28,7 +28,7 @@ def main() -> None:
         cfg = load_config(args.config)
     except ConfigError as e:
         logger.error("Failed to load config: %s", e)
-        raise SystemExit(1)
+        raise SystemExit(1) from e
 
     pipeline = Pipeline([prl_clarify, sra_rules, usg_stories, qat_tests])
     pipeline.run(cfg)
