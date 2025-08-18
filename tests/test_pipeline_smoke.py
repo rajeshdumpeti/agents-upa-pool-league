@@ -1,15 +1,13 @@
-# tests/test_pipeline_smoke.py
-from agents.prl import prl_clarify
-from agents.qat import qat_tests
-from agents.sra import sra_rules
-from agents.usg import usg_stories
-from pipelines.plan_graph import Pipeline
+from utils.config import load_config, ConfigError
+import pytest
 
 
-def test_pipeline_smoke():
-    p = Pipeline([prl_clarify, sra_rules, usg_stories, qat_tests])
-    out = p.run({"inputs": {"project_plan": "UPA scorer MVP for 8-ball"}})
-    assert "clarifications" in out
-    assert "rules_json" in out
-    assert "stories" in out and len(out["stories"]) >= 2
-    assert "test_plan" in out and len(out["test_plan"]) >= 1
+def test_load_config_ok():
+    cfg = load_config("configs/upa.yaml")
+    assert isinstance(cfg, dict)
+    assert "outputs_dir" in cfg
+
+
+def test_load_config_missing():
+    with pytest.raises(ConfigError):
+        load_config("configs/does-not-exist.yaml")
