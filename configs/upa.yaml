@@ -2,12 +2,13 @@ project_name: "UPA Pool League"
 modes: ["8-ball", "9-ball", "10-ball"]
 
 inputs:
-  rules_pdfs: []            # add local PDF paths later, e.g., ./data/upa_8ball_rules.pdf
+  rules_pdfs:
+    - ./data/8-Ball-Rules-2021-1.pdf # add local PDF paths later, e.g., ./data/upa_8ball_rules.pdf
 
 outputs_dir: "./artifacts"
 
 github:
-  enabled: false            # safe default; enable later when ready
+  enabled: false # safe default; enable later when ready
   owner: "your-github-username"
   repo: "upa-pool-league-mobile"
   labels: ["agent", "story", "upa"]
@@ -17,7 +18,7 @@ slack:
   webhook_url: "${SLACK_WEBHOOK:-}"
 
 models:
-  reasoning: "bedrock:anthropic.claude-3-5-sonnet"  # placeholder; we will wire this later
+  reasoning: "bedrock:anthropic.claude-3-5-sonnet" # placeholder; we will wire this later
   embedding: "bedrock:amazon.titan-embed-text-v2"
 
 rag:
